@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Grocery;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ShoppingListServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -75,12 +76,16 @@ public class ShoppingListServlet extends HttpServlet {
         }
 
         if (action.equals("Add")) {
-            String groceryItem = request.getParameter("item");
-            groceries = (ArrayList<String>) session.getAttribute("item");
+            String groceryName = request.getParameter("item");
+            Grocery grocery = new Grocery(groceryName);
             if (groceries == null) {
                 groceries = new ArrayList<String>();
             }
+            groceries = (ArrayList<String>) session.getAttribute("item");
+           
             session.setAttribute("groceries", groceries);
+            
+            url = "/WEB-INF/shoppingList.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }

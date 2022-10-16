@@ -16,9 +16,11 @@
         <span>${message} </span><a href="/Week6Lab_ShoppingList/register" action="logout">Logout</a><br>
         Add item: <input type="text" id="item"><button action="add">Add</button><br>
         <ul>
+            <c:if test="${groceries != null}">
             <c:forEach items="${groceries}" var="groceryItem">
                 <input type="radio" name="listitem" id="${grocery.name}"> ${grocery.name} <br>
             </c:forEach>
+            </c:if>
         </ul>
     </body>
 </html>
